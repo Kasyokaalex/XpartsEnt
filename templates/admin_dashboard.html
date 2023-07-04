@@ -1,0 +1,378 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/
+                css/fontawesome.min.css" integrity=
+            "sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>XMS</title>
+</head>
+<body>
+<style>
+    .footer {
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        background-color: black;
+        color: white;
+        text-align: center;
+    }
+</style>
+<header class="header">
+    <div class="header__container">
+        <a href="#" class="header__logo">Xparts Ent</a>
+        <div class="header__search">
+            <input type="search" placeholder="Search" class="header__input">
+            <i class='bx bx-search header__icon'></i>
+        </div>
+        <div class="header__toggle">
+            <i class='bx bx-menu' id="header-toggle"></i>
+        </div>
+    </div>
+</header>
+
+<!--side bar nav -->
+<div class="nav" id="navbar">
+    <nav class="nav__container">
+        <div>
+            <a href="#" class="nav__link nav__logo">
+                <i class='bx bxs-disc nav__icon' ></i>
+                <span class="nav__logo-name">Welcome{{ user.username }}</span>
+            </a>
+            <div class="nav__list">
+                <div class="nav__items">
+                    <a href="{% url 'index' %}" class="nav__link active">
+                        <i class='bx bx-home nav__icon' ></i>
+                        <span class="nav__name">Home</span>
+                    </a>
+
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-calendar-event nav__icon' ></i>
+                            <span class="nav__name">Events</span>
+                            <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                        </a>
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="{% url 'create_event' %}" class="nav__dropdown-item">Add Event</a>
+                                <a href="{% url 'events' %}" class="nav__dropdown-item">View Events</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav__dropdown">
+                        <a href="" class="nav__link">
+                            <i class='bx bx-user-voice nav__icon' ></i>
+                            <span class="nav__name">Clients</span>
+                            <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                        </a>
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="{% url 'view_customer' %}" class="nav__dropdown-item">View All</a>
+                                <a href="{% url 'create_user' %}" class="nav__dropdown-item">Add Client</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-user nav__icon' ></i>
+                            <span class="nav__name">Suppliers</span>
+                            <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                        </a>
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="{% url 'view_supplier' %}" class="nav__dropdown-item">View Suppliers</a>
+                                <a href="{% url 'create_user' %}" class="nav__dropdown-item">Add Supplier</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-building nav__icon' ></i>
+                            <span class="nav__name">Venues</span>
+                            <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                        </a>
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="{% url 'venues' %}" class="nav__dropdown-item">View Venues</a>
+                                <a href="{% url 'add_venue' %}" class="nav__dropdown-item">Add Venue</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-usb nav__icon' ></i>
+                            <span class="nav__name">Equipment</span>
+                            <i class=''></i>
+                        </a>
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="#" class="nav__dropdown-item">View Equipment</a>
+                                <a href="#" class="nav__dropdown-item">Add Equipment</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="nav__items">
+                    <h3 class="nav__subtitle">Menu</h3>
+                    <a href="{% url 'chat' %}" class="nav__link">
+                        <i class='bx bx-message-rounded nav__icon' ></i>
+                        <span class="nav__name">Messages</span>
+                    </a>
+
+                    <div class="nav__dropdown">
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-bell nav__icon' ></i>
+                            <span class="nav__name">Reports</span>
+                            <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                        </a>
+
+
+                        <div class="nav__dropdown-collapse">
+                            <div class="nav__dropdown-content">
+                                <a href="{% url 'users_report' %}" class="nav__dropdown-item">Users Report</a>
+                                <a href="{% url 'reports' %}" class="nav__dropdown-item">Events report</a>
+                                <a href="{% url 'weather' %}" class="nav__dropdown-item">Weather Check</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a href="{% url 'view_feedback' %}" class="nav__link">
+                        <i class='bx bx-compass nav__icon' ></i>
+                        <span class="nav__name">View Feedback</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <a href="{% url 'logout' %}" class="nav__link nav__logout">
+            <i class='bx bx-log-out nav__icon' ></i>
+            <span class="nav__name">Log Out</span>
+        </a>
+
+    </nav>
+</div>
+
+<!--main content-->
+<main>
+    <section>
+        <div class="container-fluid">
+            <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
+                <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i
+                        class="fas fa-download fa-sm text-white-50"></i></a>
+            </div>
+            <div class="row">
+                <div class="col-xl-3 col-md-6 mb-4">
+                    <div class="card border-left-primary shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                        Total Revenue</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-3">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Clients</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ client_count }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-3">
+                    <div class="card border-left-success shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                        Suppliers</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800">{{ supplier_count }}</div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-3">
+                    <div class="card border-left-info shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Total events
+                                    </div>
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col-auto">
+                                            <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ event_count }}</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-clipboard-list fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-md-6 mb-3">
+                    <div class="card border-left-warning shadow h-100 py-2">
+                        <div class="card-body">
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                        Pending Requests</div>
+                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-comments fa-2x text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12 grid-margin">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title">Event Requests</h4>
+                            <div class="table-responsive">
+
+                                <table class="table">
+                                    <thead>
+                                    <tr>
+                                        <th> Client </th>
+                                        <th> Event name</th>
+                                        <th> Event venue</th>
+                                        <th> Event date</th>
+                                        <th> attendees</th>
+                                        <th> status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% if events %}
+                                        {% for event in pages %}
+                                            <tr>
+                                                <td>{{ event.user }}</td>
+                                                <td>{{ event.name }}</td>
+                                                <td>{{ event.venue }}</td>
+                                                <td>{{ event.date }}</td>
+                                                <td>{{ event.attendees_expected }}</td>
+                                                <td>{{ event.status }}</td>
+                                                <form method="post" action="{% url 'event-approval' event.id %}">
+                                                    {% csrf_token %}
+                                                    <td>
+                                                        <button id="approve-button-{{ event.id }}" class="btn btn-success" onclick="confirmAction(event, {{ event.id }}, 'approve')">Approve</button>
+                                                        <button id="reject-button-{{ event.id }}" class="btn btn-danger" onclick="confirmAction(event, {{ event.id }}, 'reject')">Reject</button>
+                                                        <form id="approval-form-{{ event.id }}" action="{% url 'event-approval' event.id %}" method="POST" style="display: none;">
+                                                            {% csrf_token %}
+                                                            <input id="approval-action-{{ event.id }}" type="hidden" name="action" value="">
+                                                        </form>
+                                                    </td>
+                                                </form>
+                                                <script src="{% static 'event_approval.js' %}"></script>
+
+                                            </tr>
+                                        {% endfor %}
+                                    {% endif %}
+                                    </tbody>
+                                </table>
+                                {% if pages.has_previous %}
+                                    <a href="?page=1">&laquo; First</a>
+                                    <a href="?page={{ pages.previous_page_number }}">previous</a>
+
+                                {% endif %}
+                                Page{{ pages.number }} of {{ pages.paginator.num_pages }}
+
+                                {% if pages.has_next %}
+                                    <a href="?page={{ pages.next_page_number }}">Next</a>
+                                    <a href="?page={{ pages.paginator.num_pages }}">Last &raquo;</a>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+            </div>
+            {% if success_js %}
+                <script>
+                    {{ success_js }}
+                    window.location.href = "{% url 'admin2' %}";
+                </script>
+            {% endif %}
+
+        </div>
+    </section>
+</main>
+
+<script>
+    function confirmApprove(eventId) {
+        if (confirm("Are you sure you want to approve the event?")) {
+            const formId = 'approve-form-' + eventId;
+            const form = document.getElementById(formId);
+            form.submit();
+        }
+    }
+    function confirmReject(eventId){
+        if(confirm("Are you sure you want to reject the event")){
+            const formId = 'reject-form-' + eventId;
+            const form = document.getElementById(formId);
+            form.submit();
+        }
+    }
+    function confirmAction(event, eventId, action) {
+        event.preventDefault();
+
+        var approveButton = document.getElementById("approve-button-" + eventId);
+        var rejectButton = document.getElementById("reject-button-" + eventId);
+
+        if (action === 'approve') {
+            approveButton.innerText = "Approved";
+            rejectButton.style.display = "none";
+        } else if (action === 'reject') {
+            approveButton.style.display = "none";
+            rejectButton.innerText = "Rejected";
+        }
+
+        var approvalForm = document.getElementById("approval-form-" + eventId);
+        var approvalAction = document.getElementById("approval-action-" + eventId);
+        approvalAction.value = action;
+        approvalForm.submit();
+    }
+
+</script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+<div class="footer">
+    <p>Copyright@ 2023: Xparts Ent</p>
+</div>
+</body>
+</html>

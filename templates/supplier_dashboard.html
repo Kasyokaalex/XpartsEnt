@@ -1,0 +1,135 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/
+                css/fontawesome.min.css" integrity=
+            "sha384-jLKHWM3JRmfMU0A5x5AkjWkw/EYfGUAGagvnfryNV3F9VqM98XiIH7VBGVoxVSc7"
+          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <title>XMS</title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="nav" id="navbar">
+        <nav class="nav__container">
+            <div>
+                <a href="#" class="nav__link nav__logo">
+                    <i class='bx bxs-disc nav__icon' ></i>
+                    <span class="nav__logo-name">Welcome{{ user.username }}</span>
+                </a>
+                <div class="nav__list">
+                    <div class="nav__items">
+                        <a href="{% url 'index' %}" class="nav__link active">
+                            <i class='bx bx-home nav__icon' ></i>
+                            <span class="nav__name">Home</span>
+                        </a>
+
+                        <div class="nav__dropdown">
+                            <a href="#" class="nav__link">
+                                <i class='bx bx-user nav__icon' ></i>
+                                <span class="nav__name">Events</span>
+                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                            </a>
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <a href="#" class="nav__dropdown-item">View Events</a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="nav__items">
+                        <h3 class="nav__subtitle"></h3>
+                        <a href="{% url 'chat' %}" class="nav__link">
+                            <i class='bx bx-message-rounded nav__icon' ></i>
+                            <span class="nav__name">Messages</span>
+                        </a>
+
+                        <div class="nav__dropdown">
+                            <a href="#" class="nav__link">
+                                <i class='bx bx-bell nav__icon' ></i>
+                                <span class="nav__name">Reports</span>
+                                <i class='bx bx-chevron-down nav__icon nav__dropdown-icon'></i>
+                            </a>
+
+
+                            <div class="nav__dropdown-collapse">
+                                <div class="nav__dropdown-content">
+                                    <a href="{% url 'supplier_report' %}" class="nav__dropdown-item">Event reports</a>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-compass nav__icon' ></i>
+                            <span class="nav__name">Feedback</span>
+                        </a>
+                        <a href="#" class="nav__link">
+                            <i class='bx bx-bookmark nav__icon' ></i>
+                            <span class="nav__name">My profile</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <a href="{% url 'logout' %}" class="nav__link nav__logout">
+                <i class='bx bx-log-out nav__icon' ></i>
+                <span class="nav__name">Log Out</span>
+            </a>
+        </nav>
+    </div>
+    <div class="row">
+        <div class="col-md">
+            <div class="card text-center text-dark mb-3">
+                <div class="card-header">
+                    <h5>{{ user.username }} Dashboard</h5>
+                </div>
+                <div class="md">
+            <center><h2>My Events</h2></center>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Event Name</th>
+                    <th scope="col">Event Date</th>
+                    <th scope="col">Status</th>
+                </tr>
+                </thead>
+                {% if events %}
+                    {% for event in events %}
+                        <tbody>
+                        <tr>
+                            <th scope="row"></th>
+                            <td>{{ event.name}}</td>
+                            <td>{{ event.date }}</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">{{ event.status }}</button>
+
+                            </td>
+                        </tr>
+                        </tbody>
+                    {% endfor %}
+                {% endif %}
+            </table>
+        </div>
+            </div>
+        </div>
+
+
+
+
+    </div>
+</div>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+</body>

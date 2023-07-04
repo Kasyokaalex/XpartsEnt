@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>XMS Weather Check</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <a class="navbar-brand" href="#">Xparts</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="">Home</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+
+    <br>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <form method="post" class="col-md">
+        {% csrf_token %}
+        <div class="input-group">
+            <input type="text" class="form-control" name="city" placeholder="Enter location name, e.g., Kiambu">
+            <input type="date" class="form-control" name="date" placeholder="Select date">
+            <div class="input-group-btn">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+    </form>
+</nav>
+<br> <br>
+<div class="row">
+    {% if forecasts %}
+        {% for forecast in forecasts %}
+                <div class="card">
+                    <div class="card-body">
+                        <h6><span>Date & Time: </span>{{ forecast.datetime }}</h6>
+                        <h6><span>Temperature: </span>{{ forecast.temp }}</h6>
+                        <h6><span>Humidity: </span>{{ forecast.humidity }}</h6>
+                        <h6><span>Forecast: </span>{{ forecast.main }} <img src="http://openweathermap.org/img/w/{{ forecast.icon }}.png" alt="Weather Icon" style="width:70px"></h6>
+                    </div>
+                </div>
+        {% endfor %}
+    {% elif country_code and coordinate and temp and pressure and humidity %}
+        <div class="col d-flex justify-content-center">
+            <div class="card text-white bg-light mb-6">
+                <div class="card-body">
+                    <h4><span>Country Code: </span>{{ country_code }}</h4>
+                    <h4><span>Temperature in Celsius: </span>{{ temp }}</h4>
+                    <h4><span>Humidity: </span>{{ humidity }}</h4>
+                    <h4><span>Forecast: </span>{{ main }} <img src="http://openweathermap.org/img/w/{{ icon }}.png" alt="Weather Icon" style="width:70px"></h4>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+</body>
+</html>

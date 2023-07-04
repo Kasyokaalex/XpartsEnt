@@ -1,0 +1,86 @@
+{% load crispy_forms_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Event</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+  <a class="navbar-brand" href="#">Navbar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{% url 'customer' %}">Home</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <h2>Step {{ wizard.steps.step1 }} of {{ wizard.steps.count }}</h2>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ wizard.management_form }}
+                        {% if wizard.form.forms %}
+                            {{ wizard.form.management_form }}
+                            {% for form in wizard.form.forms %}
+                                <div class="card mb-4">
+                                    <div class="card-header">
+                                        <h4>{{ wizard.title }}</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        {{ form|crispy }}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="card mb-4">
+                                <div class="card-header">
+                                    <h4>Step {{ wizard.steps.step1 }}</h4>
+                                </div>
+                                <div class="card-body">
+                                    {{ wizard.form|crispy }}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% if wizard.steps.prev %}
+                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.first }}"
+                                class="btn btn-primary">First Step
+                        </button>
+                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.prev }}"
+                                class="btn btn-primary">Previous Step
+                        </button>
+                    {% endif %}
+                    {% if wizard.steps.current != wizard.steps.last %}
+                        <button name="wizard_goto_step" type="submit" value="{{ wizard.steps.next }}"
+                                class="btn btn-primary">Next Step
+                        </button>
+                    {% else %}
+                        <input type="submit" value="Submit" class="btn btn-success"/>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+            integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+            integrity="sha384-smHYKdLADwkXOn1AxkTKOtL1/9aD6Jzq0FgHsfjkhh5N6IbbVYUew+OrCXaRkfj"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+</body>
+</html>
